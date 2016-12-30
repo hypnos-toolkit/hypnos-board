@@ -1,14 +1,14 @@
 /**
  * Author: Alberto Gonzalez Perez
- * 
- * The following code works on an Attiny85 microcontroller (uC), it 
+ *
+ * The following code works on an Attiny85 microcontroller (uC), it
  * hadn't been tested in other uCs.
- * 
+ *
  * This code listens to the interrupts triggered by the LTC4150 IC
  * and reads to the polarity pin from the same circuit to update
  * the current number of times that the interruption has been
  * triggered to charge or discharge system's battery.
- * 
+ *
  * An interruption triggered while the POS pin is in LOW state
  * means a discharge status. Meanwhile a HIGH state means a charge
  * status.
@@ -50,13 +50,13 @@ volatile byte offset = 0;
  * the last number of chargeTicks stored in memory.
  */
 void requestEvent()
-{  
+{
     TinyWireS.send((uint8_t) (chargeTicks >> (LONG_BYTES - offset-1) * 8) & 0xFF);
     offset = (offset + 1) % LONG_BYTES;
 }
 
 /**
- * This is called each time an interrupt is triggered, on RISING 
+ * This is called each time an interrupt is triggered, on RISING
  * and FALLING flanks
  */
 ISR(PCINT0_vect) {
@@ -76,13 +76,13 @@ ISR(PCINT0_vect) {
 }
 
 void setup()
-{   
+{
     pinMode(POL_pin, INPUT); // Polarity pin
     pinMode(INT_pin, INPUT); // Interrupt pin
     GIMSK = 0b00100000; // Enable PC interrupts
     PCMSK = 0b00001000; // Enable interrupts on pin 3
     sei();
-    
+
     /**
      * Reminder: taking care of pull-ups is the masters job
      */
