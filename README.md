@@ -13,7 +13,7 @@ The following list describes the different files that can be found in the reposi
 
 # Compatibility
 
-The board has been successfully tested with the following microcontroller boards:
+The board has been successfully tested on the following microcontroller boards:
 * Arduino UNO R3
 * SeeedStudio LinkIt One
-* Particle Photon (via Shield-Shield adapter)
+* Particle Photon (via a Shield-Shield adapter)
